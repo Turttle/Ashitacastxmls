@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+===============================================================================
+Supernova PLD script for Ashitacast
+
+Contributors:
+Brownies, Izual and Warbreed
+
+v1.4, 03/17/15
+
+Changes:
+* Added command /storetp
+
+
+Commands:
+/maxhp will toggle maximum HP option.
+/flee will toggle movement speed gear. 
+/fset will toggle Magic resist set while engaged.
+/storetp will toggle lock on Main, Sub, Range and Ammo slots.
+/exp on, /exp off will toggle TP set while engaged, this will also lock slots 1 and 2.
+Note: 
+* Aketons are still disabled.
+===============================================================================
+-->
+
+<ashitacast>
+	<settings>
+		<buffupdate>true</buffupdate><!--Determines if your idlegear will be parsed when you gain/lose a buff. Default: TRUE -->
+		<statusupdate>true</statusupdate><!--Determines if your idlegear will be parsed when you change status(stand/rest/engage/etc).  Default: TRUE -->
+		<hpupdate>true</hpupdate><!--Determines if your idlegear will be parsed when your HP % changes.  Default: TRUE -->
+		<autoupdate>true</autoupdate><!--Determines if your idlegear will be parsed on outgoing status updates(roughly every 350ms).  Default: TRUE-->
+	</settings>
+	<variables>
+		<var name="MeleeMode">false</var>
+		<var name="FireSet">false</var>
+		<var name="Flee">false</var>
+		<var name="jelly">on</var>
+		<var name="StoreTP">on</var>
+	</variables>	
+	
+	<sets>
+		<set name="enemity">
+			<main>Macuahuitl +1</main>
+			<!--<sub>Kaiser Shield</sub>-->
+			<ammo>Aumoniere</ammo>
+			<head>Aegishjalmr</head>
+			<body>Hydra Haubert</body>
+			<hands>Hydra Moufles</hands>
+			<legs>Gem Cuisses</legs>
+			<feet>Gem Sabatons</feet>
+			<neck>Harmonia's Torque</neck>
+			<waist>Warwolf Belt</waist> 
+			<ear1>Hades Earring +1</ear1>
+			<ear2>Hades Earring +1</ear2>
+			<ring1>Mermaid Ring</ring1>
+			<ring2>Hercules' Ring</ring2>
+			<back>Valor Cape</back>
+		</set>
+		<set name="Resting">
+			<main>Chatoyant Staff</main>
+			<ammo>Aumoniere</ammo>
+			<body>Royal Cloak</body>
+			<hands>Genie Gages</hands>
+			<legs>Nomad's Hose</legs>
+			<feet>King's Sabatons</feet>
+			<neck>Beak Necklace +1</neck>
+			<waist>Sonic Belt +1</waist> 
+			<ear1>Rapture Earring</ear1>
+			<ear2>Antivenom Earring</ear2>
+			<ring1>Celestial Ring</ring1>
+			<ring2>Celestial Ring</ring2>
+			<back>Valor Cape</back>
+		</set>
+		<set name="mnd-ws">
+			<head>Hecatomb Cap +1</head>
+			<body>Hct. Harness +1</body>
+			<hands>Alkyoneus's Brc.</hands>
+			<legs>Jet Seraweels</legs>
+			<feet>Hct. leggings +1</feet>
+			<neck>Breeze Gorget</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Suppanomimi</ear1>
+			<ear2>Assault Earring</ear2>
+			<ring1>Celestial Ring</ring1>
+			<ring2>Celestial Ring</ring2>
+			<back>Cerb. Mantel +1</back>
+		</set>
+		<set name="ws">
+			<head>Hecatomb Cap +1</head>
+			<body>Hct. Harness +1</body>
+			<hands>Alkyoneus's Brc.</hands>
+			<legs>Dusk Trousers +1</legs>
+			<feet>Askar Gambieras</feet>
+			<neck>Breeze Gorget</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Suppanomimi</ear1>
+			<ear2>Assault Earring</ear2>
+			<ring1>Harmonius Ring</ring1>
+			<ring2>Harmonius Ring</ring2>
+			<back>Cerb. Mantel +1</back>
+		</set>
+		<set name="magic-deff">
+			<main>Hrotti</main>
+			<range>Lamian Kaman +1</range>
+			<head>Coral Visor +1</head>
+			<body>Blood Scale Mail</body>
+			<hands>Coral Fng. Gnt. +1</hands>
+			<legs>Coral Cuisses +1</legs>
+			<feet>Coral Greaves +1</feet>
+			<waist>Resolute Belt</waist>
+			<ear1>Merman's Earring</ear1>
+			<ear2>Merman's Earring</ear2>
+			<ring1>Gobniu's Ring</ring1>
+			<ring2>Merman's Ring</ring2>
+			<back>Lamia Mantle +1</back>
+		</set>
+		<set name="vit">
+			<main>Hauteclaire</main>
+			<sub>Aegis</sub>
+			<range>Rosenbogen +1</range>
+			<head>Kaiser Schaller</head>
+			<body>Kaiser Cuirass</body>
+			<hands>Kaiser Handschuhs</hands>
+			<legs>Kaiser Diechlings</legs>
+			<feet>Kaiser Schuhs</feet>
+			<neck>Fortitude Torque</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Robust Earring +1</ear1>
+			<ear2>Robust Earring +1</ear2>
+			<ring1>Robust Ring +1</ring1>
+			<ring2>Robust Ring +1</ring2>
+			<back>Valor Cape</back>
+		</set>
+		<set name="tp">
+			<head>Walahra Turban</head>
+			<body>Askar Korazin</body>
+			<!--<body>Aurum Cuirass</body>-->
+			<hands>Dusk Gloves +1</hands>
+			<legs>Abtal Zerehs</legs>
+			<feet>Aurum Sabatons</feet>
+			<neck>Almah Torque</neck>
+			<waist>Sonic Belt +1</waist>
+			<ear1>Suppanomimi</ear1>
+			<ear2>Assault Earring</ear2>
+			<ring1>Rajas Ring</ring1>
+			<ring2>Blitz ring</ring2>
+			<back>Valor Cape</back>
+		</set>
+		<set name="vanity">
+			<main>Hauteclaire</main>
+			<sub>Aegis</sub>
+			<!--<sub>Ritter Shield +1</sub>-->
+			<head>Glory Crown</head>
+			<!-- <head>Askar Zucchetto </head> -->
+			<body>Askar Korazin</body>
+			<hands>Askar Manopolas</hands>
+			<legs>Askar Dirs</legs>
+			<feet>Askar Gambieras</feet>
+		</set>
+		<set name="flee">
+			<legs>Blood Cuisses</legs>
+		</set>
+		<set name="dex">
+			<head>Hecatomb Cap +1</head>
+			<body>Hct. Harness +1</body>
+			<hands>Hct. Mittens +1</hands>
+			<legs>Hct. Subligar +1</legs>
+			<feet>Hct. Leggings +1</feet>
+			<neck>Breeze Gorget</neck>
+			<waist>Rapier Belt</waist>
+			<ear1>Suppanomimi</ear1>
+			<ear2>Adroit Earring +1</ear2>
+			<ring1>Thunder Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="maxhp">
+			<head>Kaiser Schaller</head>
+			<body>Kaiser Cuirass</body>
+			<hands>Alkyoneus's Brc.</hands>
+			<legs>Kaiser Diechlings</legs>
+			<feet>Dusk Ledelsens +1</feet>
+			<neck>Parade Gorget</neck>
+			<waist>Jungle Sash</waist>
+			<ear1>Cassie Earring</ear1>
+			<ear2>Intruder Earring</ear2>
+			<ring1>Harmonius Ring</ring1>
+			<ring2>Bomb Queen Ring</ring2>
+			<back>Valor Cape</back>
+		</set>
+		<include>
+		</include>
+	</sets>
+	<inputcommands>
+		<cmd input="/storetp">
+			<if advanced="$StoreTP=0">
+				<setvar name="StoreTP" value="on" />
+					<command>/ac disable main</command>
+					<command>/ac disable sub</command>
+					<command>/ac disable range</command>
+					<command>/ac disable ammo</command>
+					<addtochat color="57">Store TP mode enabled!</addtochat>
+				
+			</if>
+			<else>
+				<setvar name="StoreTP" value="off" />
+					<command>/ac enable main</command>
+					<command>/ac enable sub</command>
+					<command>/ac enable range</command>
+					<command>/ac enable ammo</command>
+					<addtochat color="57">Store TP mode disabled.</addtochat>
+			</else>
+		</cmd>
+		<cmd input="/exp on">
+			<if advanced="$MeleeMode=false">
+				<setvar name="MeleeMode" value="true" />
+					<command>/ac disable main</command>
+					<command>/ac disable sub</command>
+					<addtochat color="100">EXP mode enabled!</addtochat>
+				<elseif advance="$FireSet=ture">
+					<setvar name="FireSet" value="false" />
+					<addtochat color="200">Magic resistant mode disabled.</addtochat>
+				</elseif>
+			</if>
+			
+		</cmd>
+		<cmd input="/exp off">
+			<if advanced="$MeleeMode=true">
+				<setvar name="MeleeMode" value="false" />
+				<command>/ac enable main</command>
+				<command>/ac enable sub</command>
+				<addtochat color="200">EXP mode disabled.</addtochat>
+			</if>	
+		</cmd>
+		<cmd input="/fset on">
+			<if advanced="$FireSet=false">
+				<setvar name="FireSet" value="true" />
+					<!--<command>/ac enable main</command>
+					<command>/ac enable sub</command>-->
+					<addtochat color="100">Magic resistant mode enabled!</addtochat>
+				<elseif advance="$MeleeMode=true">
+					<setvar name="MeleeMode" value="false" />
+					<addtochat color="200">EXP mode disabled.</addtochat>
+				</elseif>
+			</if>		
+		</cmd>
+		<cmd input ="/maxhp"> <!-- Enables or disables Max MP gear mode (default: on) -->
+			<if advanced="$jelly=Off">
+				<setvar name="jelly" value="On" />
+				<addtochat color="57">Maximum HP gear enabled!</addtochat>
+			</if>
+			<else>
+				<setvar name="jelly" value="Off" />
+				<addtochat color="57">Maximum HP gear disabled.</addtochat>
+			</else>
+		</cmd>
+		<cmd input="/fset off">
+			<if advanced="$FireSet=true">
+				<setvar name="FireSet" value="false" />
+					<!--<command>/ac enable main</command>
+					<command>/ac enable sub</command>-->
+					<addtochat color="200">Magic resistant mode disabled.</addtochat>
+			</if>
+		</cmd>
+		<cmd input="/flee">
+			<if advanced="$FleeSet=false">
+				<setvar name="FleeSet" value="true" />
+					<addtochat color="200">Flee mode enabled!</addtochat>
+			</if>
+			<else>
+				<setvar name="FleeSet" value="false" />
+					<addtochat color="200">Flee mode disabled.</addtochat>
+			</else>
+		</cmd>				
+	</inputcommands>
+	<idlegear>
+		<if p_status="resting">
+			<equip set="Resting" />
+				<if advanced="(%p_hpp>=85%)&(%p_mpp<100%)">
+					<equip><neck>Parade Gorget</neck></equip>
+				</if>
+		</if>
+		<if p_status="idle">
+		<!-- vanity set -->
+			<equip set="vanity" />
+				<if advanced="(%p_hpp<=50%)">
+					<equip><ring2>Hercules' ring</ring2></equip>
+				</if>
+				<elseif advanced="(%p_hpp>=85%)&(%p_mpp<100%)">
+					<equip><neck>Parade Gorget</neck></equip>
+				</elseif>
+				<elseif advanced="(%p_hpp>=85%)&(%p_mpp>=100%)">
+					<equip><neck>Harmonia's Torque</neck></equip>
+				</elseif>
+				<elseif advanced="$FleeSet=1">
+					<equip set="flee" />
+				</elseif>
+		</if>
+		<if p_status="engaged">
+			<equip set="vit" />
+				<if advanced="(%p_hpp<=50%)">
+					<equip><ring2>Hercules' ring</ring2></equip>
+				</if>
+				<elseif advanced="(%p_hpp>=85%)&(%p_mpp<100%)">
+					<equip><neck>Parade Gorget</neck></equip>
+				</elseif>
+				<elseif advanced="(%p_hpp>=85%)&(%p_mpp>=100%)">
+					<equip><neck>Harmonia's Torque</neck></equip>
+				</elseif>
+				<elseif advanced="($jelly=On)">
+					<equip><lring>Jelly ring</lring></equip>
+				</elseif>
+		</if>
+		<if p_status="engaged">	
+			<if advanced="$FireSet=true">
+				<equip set="magic-deff" />
+			</if>
+		</if>	
+		<if p_status="engaged">		
+			<if advanced="$MeleeMode=true">
+				<equip set="tp" />
+			</if>	
+		</if>
+		<!-- this will check the zone you are in and load the appropriated Aketon  
+		<if e_area="Port San d'Oria|*San d'Oria|-Dynamis*">
+			<equip><body>Kingdom Aketon</body></equip>
+		</if>
+		<if e_area="Port Windurst|Windurst*|-Dynamis*">
+			<equip><body>Federation Aketon</body></equip>
+		</if>
+		<if e_area="Port Bastok|*Bastok|Metalworks|-Dynamis*">
+			<equip><body>Republic Aketon</body></equip>
+		</if>-->			
+	</idlegear>
+	<preranged>	
+	</preranged>
+	<midranged>
+	</midranged>
+	<premagic>
+		<if ad_skill="healingmagic">
+			<equip><ear2>Hospitaler Earring</ear2></equip>
+			<if p_status="idle">
+			<equip><main>Chatoyant Staff</main></equip>
+			</if>
+			<!--  Change to Character name -->
+			<elseif at_name="Brownies">
+				<equip set="maxhp" />
+					<gearlock length="4" />
+			</elseif>
+		</if>
+		<if ad_skill="divinemagic">
+			<equip set="enemity" />
+				<gearlock length="4" />
+		</if>
+	</premagic>
+	<midmagic>
+	</midmagic>
+	<jobability>
+		<if ad_name="Provoke|Shield Bash|Sentinel">
+			<equip set="enemity" />
+				<gearlock length="4" />
+				<if ad_name="Shield Bash">
+					<equip><hands>Vlr. Gauntlets +1</hands></equip>
+					<equip><ear2>Knightly earring</ear2></equip>
+						<gearlock length="6" />
+				</if>
+		</if>
+		<elseif ad_name="Rampart">
+			<equip><head>Valor Coronet</head></equip>
+				<gearlock length="5" />
+		</elseif>
+		<elseif ad_name="Sentinel">
+			<equip><feet>Valor Leggings</feet></equip>
+				<gearlock length="5" />
+		</elseif>			
+	</jobability>
+	<weaponskill>
+		<if ad_name="Savage Blade|Swift Blade|Seraph Blade|Shining Blade|Knights of Round|Death Blossom|Sanguine Blade">
+			<equip set="mnd-ws" />
+				<gearlock length="5" />
+		</if>
+		<if ad_name="Vorpal Blade|Circle Blade|Flat Blade|Atonement">
+			<equip set="ws" />
+				<gearlock length="5" />
+		</if>
+		<if ad_name="Chant du Cygne">
+			<equip set="dex" />
+				<gearlock length="5" />
+		</if>
+	</weaponskill>
+</ashitacast>
