@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+===============================================================================
+Supernova RNG script for Ashitacast
+Contributors:
+Brownies
+
+v1.0, 11/25/14
+
+Changes:
+* Test xml
+
+Commands:
+
+Notes:
+WS: Flaming Arrow, Piercing Arrow, Dulling Arrow, Sidewinder, Blast Arrow, Arching Arrow, Empyreal Arrow.
+	need STR: 20% AGI: 50%
+WS: Refulgent Arrow
+	need STR: 60%
+WS: Apex Arrow, Last Stand
+	need: AGI: 73% / 76% / 79% / 82% / 85%
+WS: Namas Arrow
+	need: STR: 40% AGI:40%
+WS: Jishnu's Radiance
+	need: DEX:80%
+WS: Hot Shot, Split Shot, Sniper Shot, Slug Shot, Blast Shot, Heavy Shot, Detonator, Wildfire (AGI:60%)
+	need: AGI:70%
+WS: Coronach
+	need: DEX:40% AGI:40%
+WS: Trueflight, Leaden Salute
+	need: AGI:100%
+	
+===============================================================================
+-->
+<ashitacast>
+	<settings>
+		<buffupdate>false</buffupdate>
+		<statusupdate>false</statusupdate>
+		<hpupdate>false</hpupdate>
+		<autoupdate>true</autoupdate>
+	</settings>
+	<sets>
+
+		<set name="agi-str">
+			<head>Wyvern Helm +1</head>
+			<body>Kirin's Osode</body>
+			<hands>Seiryu's Kote</hands>
+			<legs>Enkidu's Subligar</legs>
+			<feet>Enkidu's Leggings</feet>
+			<neck>Peacock Amulet</neck>
+			<waist>Scout's Belt</waist>
+			<ear1>Vision Earring</ear1>
+			<ear2>Suppanomimi</ear2>
+			<ring1>Rajas Ring</ring1>
+			<ring2>Nimble Ring +1</ring2>
+			<back>Amemet Mantle +1</back>
+		</set>
+		<set name="racc">
+			<head>Optical Hat</head>
+			<body>Kyudogi +1</body>
+			<hands>Blood Fng. Gnt.</hands>
+			<legs>Dusk Trousers +1</legs>
+			<feet>Enkidu's Leggings</feet>
+			<neck>Qiqirn Collar</neck>
+			<waist>Scout's Belt</waist>
+			<ear1>Vision Earring</ear1>
+			<ear2>Suppanomimi</ear2>
+			<ring1>Behemoth Ring +1</ring1>
+			<ring2>Behemoth Ring +1</ring2>
+			<back>Amemet Mantle +1</back>
+		</set>
+		<set name="agi">
+			<head>Enkidu's Cap</head>
+			<body>Denali Jacket</body>
+			<hands>Seiryu's Kote</hands>
+			<legs>Denali Kecks</legs>
+			<feet>Enkidu's Leggings</feet>
+			<neck>Peacock Amulet</neck>
+			<waist>Scout's Belt</waist>
+			<ear1>Vision Earring</ear1>
+			<ear2>Suppanomimi</ear2>
+			<ring1>Nimble Ring +1</ring1>
+			<ring2>Nimble Ring +1</ring2>
+			<back>Amemet Mantle +1</back>
+		</set>
+		<include>
+		</include>
+	</sets>
+	<variables>
+	</variables>
+	<inputcommands>
+	</inputcommands>
+	<idlegear>
+		<if p_status="engaged">
+			<equip set="racc" />
+		</if>
+	</idlegear>
+	<preranged>
+	</preranged>
+	<midranged>
+	</midranged>
+	<premagic>
+	</premagic>
+	<midmagic>
+	</midmagic>
+	<jobability>
+	</jobability>
+	<weaponskill>
+		<if ad_name="Flaming Arrow|Piercing Arrow|Dulling Arrow|Sidewinder|Blast Arrow|Arching Arrow|Empyreal Arrow">
+			<equip set="agi-str" />
+				<if ad_name="Sidewinder">
+					<equip><neck>Breeze Gorget</neck></equip>
+						<gearlock length="6" />
+				</if>
+		</if>
+		<if ad_name="Hot Shot|Split Shot|Sniper Shot|Slug Shot|Blast Shot|Heavy Shot|Detonator|Wildfire">
+			<equip set="agi" />
+				<if ad_name="Slug Shot">
+					<equip><neck>Breeze Gorget</neck></equip>
+						<gearlock length="6" />
+				</if>
+		</if>
+	</weaponskill>
+</ashitacast>

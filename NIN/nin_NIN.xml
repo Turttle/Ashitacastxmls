@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+===============================================================================
+Supernova NIN script for Ashitacast
+Contributors:
+Brownies
+v1.0, 11/25/14
+
+Changes:
+* Test xml
+
+Commands:
+
+Notes:
+* needs a eva set
+	
+===============================================================================
+-->
+<ashitacast>
+	<settings>
+		<buffupdate>false</buffupdate>
+		<statusupdate>false</statusupdate>
+		<hpupdate>false</hpupdate>
+		<autoupdate>true</autoupdate>
+	</settings>
+	<sets>
+		<!-- Here AGI set-->
+		<set name="agi">
+			<head>Enkidu's cap</head>
+			<body>Kirin's Osode</body>
+			<hands>Seiryu's Kote</hands>
+			<feet>Enkidu's Leggings</feet>
+			<ear1>Suppanomimi</ear1>
+			<ring1>Nimble Ring +1</ring1>
+			<ring2>Nimble Ring +1</ring2>
+		</set>
+		<!-- Here STR and DEX set -->
+		<set name="str-dex">
+			<head>Shr.Znr.Kabuto +1</head>
+			<body>Kirin's Osode</body>
+			<hands>Ochiudo's Kote</hands>
+			<legs>Byakko's Haidate</legs>
+			<feet>Enkidu's Leggings</feet>
+			<neck>Ire Torque +1</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Harmonius Earring</ear1>
+			<ear2>Harmonius Earring</ear2>
+			<ring1>Rajas Ring</ring1>
+			<ring2>Harmonius Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<!-- Put here DEX set-->
+		<set name="dex">
+			<head>Shr.Znr.Kabuto +1</head>
+			<body>Kirin's Osode</body>
+			<hands>Ochiudo's Kote</hands>
+			<legs>Byakko's Haidate</legs>
+			<feet>Enkidu's Leggings</feet>
+			<neck>Ancient Torque</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Adroit Earring +1</ear1>
+			<ear2>Pixie Earring</ear2>
+			<ring1>Rajas Ring</ring1>
+			<ring2>Thunder Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="vanity">
+			<body>Tidal Talisman</body>
+			<legs>Dinner Hose</legs>
+		</set>
+		<!-- Put here Haste/TP set -->
+		<set name="tp">
+			<head>Walahra Turban</head>
+			<body>Ninja Chainmail</body>
+			<hands>Ochiudo's Kote</hands>
+			<legs>Byakko's Haidate</legs>
+			<feet>Enkidu's Leggings</feet>
+			<neck>Almah Torque</neck>
+			<waist>Sonic Belt +1</waist>
+			<ear1>Suppanomimi</ear1>
+			<ear2>Pixie Earring</ear2>
+			<ring1>Rajas Ring</ring1>
+			<ring2>Nimble Ring +1</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<include>
+		</include>
+	</sets>
+	<variables>
+	</variables>
+	<inputcommands>
+	</inputcommands>
+	<idlegear>
+		<!-- Idle gear to be loaded in specific area -->
+		<if e_area="Chocobo Circuit">
+			<equip set="vanity" />
+		</if>
+		<elseif p_status="engaged">
+			<equip set="tp" />
+		</elseif>
+	</idlegear>
+	<preranged>
+	</preranged>
+	<midranged>
+	</midranged>
+	<premagic>
+	</premagic>
+	<midmagic>
+	</midmagic>
+	<jobability>
+	</jobability>
+	<weaponskill>
+	<!-- equip str-dex set when any of these ws are used -->
+		<if ad_name="Blade: Rin|Blade: Retsu|Blade: Jin|Blade: Ten|Blade: Ku">
+			<equip set="str-dex" />
+				<if ad_name="Blade: Jin">
+					<equip><neck>Breeze Gorget</neck></equip>
+				</if>
+				<gearlock length="3" />
+		</if>
+		<!-- equip agi set when any of these ws are used -->
+		<if ad_name="Blade: Hi">
+			<equip set="agi" />
+				<gearlock length="3" />
+		</if>
+		<!-- equip str-int set when any of these ws are used -->
+		<if ad_name="Blade: Teki|Blade: To|Blade: Chi|Blade: Ei">
+			<equip set="str-int" />
+				<if ad_name="Blade: To">
+					<equip><neck>Breeze Gorget</neck></equip>
+				</if>
+				<gearlock length="3" />
+		</if>
+		<!-- equip dex-int set when any of these ws are used -->
+		<if ad_name="Blade: Yu">
+			<equip set="dex-int" />
+				<gearlock length="3" />
+		</if>
+		<!-- equip dex set when any of these ws are used -->
+		<if ad_name="Blade: Metsu">
+			<equip set="dex" />
+				<if ad_name="Blade: Metsu">
+					<equip><neck>Breeze Gorget</neck></equip>
+				</if>
+				<gearlock length="3" />
+		</if>
+	</weaponskill>
+</ashitacast>

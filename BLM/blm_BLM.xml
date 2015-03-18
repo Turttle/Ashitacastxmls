@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+===============================================================================
+Supernova BLM script for Ashitacast
+
+Contributors:
+Sigmund, Novah, Brownies
+v1.3, 07/07/2014
+
+Changes:
+* Due to changes in either the new version of Ashita or Ashitacast, the timing
+  in which elemental nuke gear swaps back to idle gear is happening much sooner
+  than it should.  This causes the bonuses from nuke gear to be completely neg-
+  ated.  Until this issue is resolved, I have implemented some custom gearlock
+  timings to keep nuking gear equipped until the spell is completely finished.
+  
+  These timings do not take into account any haste or fast cast gear, or fast
+  cast conferred by /RDM.  If you are using this script, feel free to play
+  around with the values below until things work right for you.
+
+To do:
+* Figure out a way to force activate the Sorcerer Ring's latent via gear swaps.
+  
+Note:
+* Sometimes when changing rings or earrings in gear swaps, a ring or earring
+  from a previous gear set is held over when swapping to the new set. This
+  seems to happen when the new gearset has the same item in both slots (two
+  phanntom earrings +1, one in each ear, for example.)  When writing gearsets,
+  prioritize placing jewelry in the left ear or left ring finger first.
+===============================================================================
+-->
+<ashitacast>
+	<settings>
+		<hpupdate>false</hpupdate>
+		<autoupdate>true</autoupdate>
+	</settings>
+	
+	<variables>
+		<var name="MaxMPThreshold2">1270</var><!-- Second threshold -->
+		<var name="MaxMPThreshold">890</var> <!-- Threshold to activate Max MP gear -->
+		<var name="MaxMPMode">On</var>
+		<var name="MeleeMode">0</var>
+		<var name="ResistMode">0</var>
+	</variables>
+	
+	<sets>
+		<set name="Idle">
+			<main>Terra's Staff</main>
+			<sub>Vivid Strap +1</sub>
+			<ammo>Phtm. Tathlum</ammo>
+			<head>Src. Petasos +1</head>
+			<neck>Orochi Nodowa +1</neck>
+			<lear>Sorcerer's Earring</lear>
+			<rear>Antivenom Earring</rear>
+			<body>Dalmatica +1</body>
+			<hands>Src. Gloves +1</hands>
+			<lring>Celestial Ring</lring>
+			<rring>Celestial Ring</rring>
+			<back>Umbra Cape</back>
+			<waist>Headlong Belt</waist>
+			<legs>Sorcerer's Tonban</legs>
+			<feet>Herald's Gaiters</feet>
+		</set>
+		
+		<set name="Resting">
+			<main>Imperial Wand</main>
+			<sub>Legion Scutum</sub>
+			<head>Oracle's Cap</head>
+			<neck>Beak Necklace +1</neck>
+			<lear>Rapture Earring</lear>
+			<rear>Antivenom Earring</rear>
+			<body>Oracle's robe</body>
+			<hands>Oracle's Gloves</hands>
+			<lring>Celestial Ring</lring>
+			<rring>Celestial Ring</rring>
+			<back>Invigorating Cape</back>
+			<waist>headlong belt</waist>
+			<legs>Oracle's braconi</legs>
+			<feet>Numerist Pumps</feet>
+		</set>
+		
+		<set name="Haste">
+			<head>Walahra Turban</head>
+			<waist>Headlong Belt</waist>
+		</set>
+		
+		<!-- Magic gearsets -->
+		
+		<!-- For future use -->
+		<set name="HPConvert" />
+		
+		<set name="FastCast">
+			<main>Chatoyant Staff</main>
+			<sub>Vivid Strap +1</sub>
+		</set>
+		
+		<set name="INT">
+			<!--<main>Dorje</main>-->
+			<main>Chatoyant Staff</main>
+			<sub>Vivid Strap +1</sub>
+			<ammo>Phtm. Tathlum</ammo>
+			<head>Src. Petasos +1</head>
+			<neck>Lmg. Medallion +1</neck>
+			<lear>Omn. Earring +1</lear>
+			<rear>Omn. Earring +1</rear>
+			<body>Mahatma Hpl.</body>
+			<hands>Mahatma Cuffs</hands>
+			<lring>Omn. Ring +1</lring>
+			<rring>Omn. Ring +1</rring>
+			<back>Hecate's Cape</back>
+			<waist>Witch Sash</waist>
+			<legs>Mahatma Slops</legs>
+			<feet>Goliard Clogs</feet>
+		</set>
+		
+		<set name="MND">
+			<main>Chatoyant Staff</main>
+			<sub>Vivid Strap +1</sub>
+			<body>Mahatma Hpl.</body>
+			<lring>Celestial Ring</lring>
+			<rring>Celestial Ring</rring>
+			<back>Ixion Cape</back>
+			<waist>Witch Sash</waist>
+			<legs>Mahatma Slops</legs>
+		</set>
+		
+		<set name="Dark" baseset="INT">
+			<sub>Dark Grip</sub>
+			<neck>Dark Torque</neck>
+			<lear>Dark Earring</lear>
+			<rear>Incubus Earring +1</rear>
+			<hands>Sorcerer's Gloves</hands>
+			<legs>Wizard's Tonban</legs>
+			<feet>Genie Huaraches</feet>
+		</set>
+		
+		<set name="Elemental" baseset="INT">
+			<lear>Moldavite Earring</lear>
+			<rear>Crapaud Earring</rear>
+			<body>Genie Weskit</body>
+			<hands>Zenith Mitts +1</hands>
+		</set>
+		
+		<!-- For Sky, Sea, and other events where elemental resistance is high. -->
+		<set name="ElementalResist" baseset="Elemental">
+			<lear>Incubus Earring +1</lear>
+			<rear>Incubus Earring +1</rear>
+			<hands>Wizard's Gloves</hands>
+			<legs>Sorcerer's Tonban</legs>
+		</set>
+		
+		<set name="Enfeebling">
+			<head>Genie Tiara</head>
+			<neck>Enfeebling Torque</neck>
+			<lear>Incubus Earring +1</lear>
+			<rear>Incubus Earring +1</rear>
+			<body>Wizard's Coat</body>
+			<legs>Genie Lappas</legs>
+		</set>
+		
+		<set name="Enhancing">
+			<neck>Enhancing Torque</neck>
+			<lear>Augment. Earring</lear>
+			<feet>Genie Huaraches</feet>
+		</set>
+		
+		<set name="Healing" baseset="MND">
+			<neck>Fylgja Torque +1</neck>
+			<rear>Roundel Earring</rear>
+			<hands>Mahatma Cuffs</hands>
+		</set>
+		
+		<set name="MaxMP">
+			<main>Dorje</main>
+			<sub>Dark Grip</sub>
+			<ammo>Hedgehog Bomb</ammo>
+			<head>Zenith Crown +1</head>
+			<neck>Uggalepih Pendant</neck>
+			<lear>Astral Earring</lear>
+			<rear>Antivenom Earring</rear>
+			<body>Dalmatica +1</body>
+			<hands>Zenith Mitts +1</hands>
+			<lring>Serket Ring</lring>
+			<rring>Celestial Ring</rring>
+			<back>Invigorating Cape</back>
+			<waist>Hierarch Belt</waist>
+			<legs>Zenith Slacks +1</legs>
+			<feet>Zenith Pumps +1</feet>
+		</set>
+		
+		<set name="Stoneskin">
+			<main>Chatoyant Staff</main>
+			<sub>Vivid Strap +1</sub>
+			<head>none</head>
+			<neck>Enhancing Torque</neck>
+			<lear>Augment. Earring</lear>
+			<rear>Antivenom Earring</rear>
+			<body>Ixion Cloak</body>
+			<hands>Sorcerer's Gloves</hands>
+			<lring>Celestial Ring</lring>
+			<rring>Celestial Ring</rring>
+			<back>Ixion Cape</back>
+			<waist>Witch Sash</waist>
+			<legs>Mahatma Slops</legs>
+			<feet>Genie Huaraches</feet>
+		</set>
+		
+		<!-- Weaponskills -->
+		<set name="WS-SpiritTaker">
+			<ammo>Phtm. Tathlum</ammo>
+			<head>Mahatma Hat</head>
+			<neck>Promise Badge</neck>
+			<lear>Celestial Earring</lear>
+			<rear>Celestial Earring</rear>
+			<body>Mahatma Hpl.</body>
+			<hands>Mahatma Cuffs</hands>
+			<lring>Omn. Ring +1</lring>
+			<rring>Omn. Ring +1</rring>
+			<back>Ixion Cape</back>
+			<waist>Witch Sash</waist>
+			<legs>Mahatma Slops</legs>
+			<feet>Mahatma Pigaches</feet>
+		</set>
+		
+		<set name="elemental">
+			<ammo>Phtm. Tathlum</ammo>
+			<head>Oracle's Cap</head>
+			<body>Genie Weskit</body>
+			<hands>Genie Manillas</hands>
+			<legs>Sorcerer's Tonban</legs>
+			<feet>Numerist Pumps</feet>
+			<neck>Lmg. Medallion +1</neck>
+			<waist>Witch Sash</waist>
+			<ear1>Incubus Earring +1</ear1>
+			<ear2>Incubus Earring +1</ear2>
+			<ring1>Omn. Ring +1</ring1>
+			<ring2>Omn. Ring +1</ring2>
+			<back>Hecate's Cape</back>
+		</set>
+		<set name="Maxmp2">
+			<rear>Celestial Earring</rear>
+			<rring>Ether Ring</rring>
+			<back>Mahatma Cape</back>
+		</set>
+		<include>
+			<item>Aquilo's Staff</item>
+			<item>Thunder Grip</item>
+		</include>
+	</sets>
+	
+	<inputcommands>
+		<cmd input="/melee">
+			<if advanced="$MeleeMode=0">
+				<setvar name="MeleeMode" value="1" />
+				<command>/ac disable main</command>
+				<command>/ac disable sub</command>
+				<addtochat color="57">Melee mode enabled!</addtochat>
+			</if>
+			<else>
+				<setvar name="MeleeMode" value="0" />
+				<command>/ac enable main</command>
+				<command>/ac enable sub</command>
+				<addtochat color="57">Melee mode disabled.</addtochat>
+			</else>
+		</cmd>
+		<cmd input="/resist">
+			<if advanced="$ResistMode=0">
+				<setvar name="ResistMode" value="1" />
+				<addtochat color="57">Elemental resistance mode enabled!</addtochat>
+			</if>
+			<else>
+				<setvar name="ResistMode" value="0" />
+				<addtochat color="57">Elemental resistance mode disabled.</addtochat>
+			</else>
+		</cmd>
+		<cmd input ="/maxmp"> <!-- Enables or disables Max MP gear mode (default: on) -->
+			<if advanced="$MaxMPMode=Off">
+				<setvar name="MaxMPMode" value="On" />
+				<addtochat color="57">Maximum MP gear enabled!</addtochat>
+			</if>
+			<else>
+				<setvar name="MaxMPMode" value="Off" />
+				<addtochat color="57">Maximum MP gear disabled.</addtochat>
+			</else>
+		</cmd>
+		<cmd input="/debug" />
+	</inputcommands>
+	
+	<idlegear>
+		<if p_status="resting">
+			<if advanced="(%p_mp>=$MaxMPThreshold)&($MaxMPMode=On)">
+				<equip set="MaxMP" />
+					<if advanced="(%p_mp>=$MaxMPThreshold2)&($MaxMPMode=On)">
+					<equip set="maxmp2" />
+						<gearlock length="7" />
+				</if>
+			</if>
+			<else>
+				<equip set="Resting" />
+			</else>
+		</if>
+		<!--<elseif p_status="engaged">
+			<equip><main lock="true" /></equip> <!-- Main slot will be locked to allow you to swap to a weapon of your choosing while engaged -->
+		<!--</elseif>-->
+		<if p_status="idle">
+			<if advanced="(%p_mp>=$MaxMPThreshold)&($MaxMPMode=On)">
+				<equip set="MaxMP" />
+					<if advanced="(%p_mp>=$MaxMPThreshold2)&($MaxMPMode=On)">
+						<equip set="maxmp2" />
+							<gearlock length="7" />
+					</if>
+			</if>
+			<else>
+				<equip set="Idle" />
+			</else>
+		</if>
+	</idlegear>
+	
+	<!-- Put fast cast gear in the premagic section. -->
+	<premagic>
+		<if advanced="(%p_mp>=$MaxMPThreshold)&($MaxMPMode=On)"> <!-- Max MP gear if past the max MP threshold and only if Max MP Mode is enabled -->
+			<equip set="MaxMP" />
+				<if advanced="(%p_mp>=$MaxMPThreshold2)&($MaxMPMode=On)">
+					<equip set="maxmp2" />
+						<gearlock length="7" />
+				</if>
+		</if>
+		<else>
+			<equip set="FastCast" />
+		</else>
+	</premagic>
+	
+	<midmagic>
+		<if advanced="(%p_mp>=$MaxMPThreshold)&($MaxMPMode=On)"> <!-- Max MP gear if past the max MP threshold and only if Max MP Mode is enabled -->
+			<equip set="MaxMP" />
+				<if advanced="(%p_mp>=$MaxMPThreshold2)&($MaxMPMode=On)">
+					<equip set="maxmp2" />
+						<gearlock length="7" />
+				</if>
+		</if>
+		<else>
+		<if ad_type="blackmagic">
+			<if ad_skill="darkmagic">
+				<equip set="Dark" />
+				<!-- Use Thunder Grip for Stun instead of the Dark Grip -->
+				<if ad_name="Stun">
+					<equip><sub>Thunder Grip</sub></equip>
+				</if>
+			</if>
+			<elseif ad_skill="elementalmagic">
+				<!-- Elemental debuffs benefit from pure INT. -->
+				<if ad_name="Burn|Choke|Drown|Frost|Rasp|Shock">
+					<equip set="INT" />
+				</if>
+				<!-- Nuke gear -->
+				<else>
+					<!-- If /resist is turned on, elemental resist gear
+					     will be used in place of regular nuke gear.    -->
+					<if advanced="$ResistMode=1">
+						<equip set="ElementalResist" />
+						<!-- CONDITIONAL NUKE GEAR CHECKS BELOW -->
+						<!-- Use Aquilo's if casting ice nukes. -->
+						<if ad_name="Blizza*|Freeze*">
+							<equip><main>Aquilo's Staff</main></equip>
+						</if>
+					</if>
+					<!--- If /resist is turned off, regular nuking gear will be used. -->
+					<else>
+						<equip set="Elemental" />
+						<!-- CONDITIONAL NUKE GEAR CHECKS BELOW -->
+						<!-- Use Aquilo's if casting ice nukes. -->
+						<if ad_name="Blizza*|Freeze*">
+							<equip><main>Aquilo's Staff</main></equip>
+						</if>
+						<!-- Uggalepih Pendant latent checker -->
+						<!-- NOTE:  If you play on a private server, the Uggy pendant
+							 may not be put on at the appropriate time due to differ-
+							 ences between client spell MP costs and server MP costs  -->
+						<if advanced="%ad_mppaftercast<51">
+							<equip><neck>Uggalepih Pendant</neck></equip>
+						</if>
+						<!-- Sorcerer's Ring latent checker -->
+						<if advanced="(%p_hpp<76)&(%p_tp<100)">
+							<equip><lring>Sorcerer's Ring</lring></equip>
+						</if>
+						<!-- Sorcerer's Tonban latent checker -->
+						<if advanced="%ad_element=%e_dayelement">
+							<equip><legs>Sorcerer's Tonban</legs></equip>
+						</if>
+					</else>
+					<!-- As of 7/7/14, nukes need custom delay timings or else idle gear is swapped back in too soon. -->
+					<!-- These values don't take into account haste or fast cast.  Tweak these numbers as needed. -->
+					<if ad_name="*IV"> <!-- Tier IV -->
+						<gearlock length="9" />
+					</if>
+					<elseif ad_name="Tornado|Quake|Flood|Freeze|Flare"> <!--- AM Tire1-->
+							<gearlock length="20" />
+						</else>
+					<elseif ad_name="*III"> <!-- Tier III -->
+						<if ad_name="*ga III">
+							<gearlock length="10" />
+						</if>
+						<else>
+							<gearlock length="9" />
+						</else>
+					</elseif>
+					<elseif ad_name="*II"> <!-- Tier II -->
+						<if ad_name="*ga II">
+							<gearlock length="8" />
+						</if>
+						<else>
+							<gearlock length="7" />
+						</else>
+					</elseif>
+					<else> <!-- Tier I -->
+						<if ad_name="*ga">
+							<gearlock length="4" />
+						</if>
+						<else>
+							<gearlock length="3" />
+						</else>
+					</else>
+				</elseif>
+			</elseif>
+			<elseif ad_skill="enfeeblingmagic">
+				<equip set="INT" />
+				<equip set="Enfeebling" />
+				<!-- Put on Dark Grip for landing Sleeps -->
+				<if ad_name="Sleep*">
+					<equip><sub>Dark Grip</sub></equip>
+				</if>
+			</elseif>
+		</if>
+		<elseif ad_type="whitemagic">
+			<if ad_skill="enfeeblingmagic">
+				<equip set="MND" />
+				<equip set="Enfeebling" />
+			</if>
+			<elseif ad_skill="enhancingmagic">
+				<if ad_name="Stoneskin">
+					<equip set="Stoneskin" />
+				</if>
+				<elseif ad_name="Bar*|Phalanx">
+					<equip set="Enhancing" />
+				</elseif>
+				<elseif ad_name="Sneak">
+					<!-- Make sure to replace the name in "t_name" with your own
+					     before using this script.                                -->
+					<if at_name="Brownies">
+						<command>/cancel 71</command>
+					</if>
+				</elseif>
+			</elseif>
+			<elseif ad_skill="healingmagic">
+				<if ad_name="Cur*">
+					<equip set="Healing" />
+				</if>
+				<elseif ad_name="*Raise|Reraise">
+					<equip set="Haste" />
+				</elseif>
+			</elseif>
+		</elseif>
+		<elseif ad_type="ninjutsu">
+			<if ad_name="Utsusemi*">
+				<equip set="Haste" />
+			</if>
+		</elseif>
+	</else>
+	</midmagic>
+	
+	<weaponskill>
+		<if ad_name="Spirit Taker">
+			<equip set="WS-SpiritTaker" />
+		</if>
+	</weaponskill>
+</ashitacast>

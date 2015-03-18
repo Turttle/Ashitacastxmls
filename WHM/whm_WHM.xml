@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+===============================================================================
+Supernova WHM script for Ashitacast
+
+Contributors:
+Brownies
+
+v1.1, 03/02/2015
+
+Changes:
+* Clean up
+* Removed blm gear
+* Added Enhancing and Enfeebling sets
+
+To do:
+* Need more testing
+Note:
+* change player name
+* Set MaxMPThreshold to +1 mp from total mp while on idle gear
+* Set MaxMPThreshold2 to -50 mp from total mp while on maxmp gear
+Variable:
+* /maxmp toggle maximum mp set on or off (this set might put your hp really low).
+===============================================================================
+-->
+<ashitacast>
+	<settings>
+		<buffupdate>false</buffupdate>
+		<statusupdate>false</statusupdate>
+		<hpupdate>false</hpupdate>
+		<autoupdate>true</autoupdate>
+	</settings>
+	<sets>
+		<set name="heal">
+			<head>Aristocrat's Crown</head>
+			<body>Aristocrat's Coat</body>
+			<hands>Blessed Mitts +1</hands>
+			<legs>Bls. Trousers +1</legs>
+			<feet>Blessed Pumps +1</feet>
+			<neck>Promise Badge</neck>
+			<waist>Witch Sash</waist>
+			<ear1>Celestial Earring</ear1>
+			<ear2>Astral Earring</ear2>
+			<ring1>Ether Ring</ring1>
+			<ring2>Serket Ring</ring2>
+			<back>Invigorating Cape</back>
+		</set>
+		<set name="Healing" baseset="MND">
+			<hands>Mahatma Cuffs</hands>
+			<legs>Cleric's Pantaln.</legs>
+			<neck>Fylgja Torque +1</neck>
+			<ear1>Roundel Earring</ear1>			
+		</set>
+		<set name="Idle">
+			<main>Terra's Staff</main>
+			<sub>Vivid Strap +1</sub>
+			<head>Aristocrat's Crown</head>
+			<body>Aristocrat's Coat</body>
+			<hands>Blessed Mitts +1</hands>
+			<legs>Bls. Trousers +1</legs>
+			<feet>Herald's Gaiters</feet>
+			<waist>Headlong Belt</waist>
+			<back>Umbra Cape</back>
+		</set>
+		<set name="melee">
+			<head>Optical Hat</head>
+			<body>Aristocrat's Coat</body>
+			<hands>Blessed Mitts +1</hands>
+			<legs>Bls. Trousers +1</legs>
+			<feet>Herald's Gaiters</feet>
+			<neck>Beak Necklace +1</neck>
+			<waist>Headlong Belt</waist>
+			<ear1>Merman's Earring</ear1>
+			<ear2>Harmonius Earring</ear2>
+			<ring1>Rajas Ring</ring1>
+			<ring2>Unyielding Ring</ring2>
+			<back>Umbra Cape</back>
+		</set>
+		<set name="MND" baseset="heal">
+			<main>Chatoyant Staff</main>
+			<sub>Vivid Strap +1</sub>
+			<body>Aristocrat's Coat</body>
+			<lring>Celestial Ring</lring>
+			<rring>Celestial Ring</rring>
+			<back>Ixion Cape</back>
+			<waist>Witch Sash</waist>
+			<legs>Mahatma Slops</legs>
+		</set>
+		<set name="Resting">
+			<main>Imperial Wand</main>
+			<sub>Legion Scutum</sub>
+			<head>Oracle's Cap</head>
+			<neck>Beak Necklace +1</neck>
+			<lear>Rapture Earring</lear>
+			<rear>Antivenom Earring</rear>
+			<body>Oracle's robe</body>
+			<hands>Oracle's Gloves</hands>
+			<lring>Celestial Ring</lring>
+			<rring>Celestial Ring</rring>
+			<back>Invigorating Cape</back>
+			<waist>headlong belt</waist>
+			<legs>Oracle's braconi</legs>
+			<feet>Numerist Pumps</feet>
+		</set>
+		<set name="Enhancing">
+			<main>Chatoyant Staff</main>
+			<sub>Vivid Strap +1</sub>
+			<head>Goliard Chapeau</head>
+			<neck>Enhancing Torque</neck>
+			<lear>Augment. Earring</lear>
+			<rear>Antivenom Earring</rear>
+			<body>Goliard Saio</body>
+			<hands>Cleric's Mitts</hands>
+			<lring>Celestial Ring</lring>
+			<rring>Celestial Ring</rring>
+			<back>Ixion Cape</back>
+			<waist>Witch Sash</waist>
+			<legs>Mahatma Slops</legs>
+			<feet>Cleric's Duckbills</feet>
+		</set>
+		<set name="Enhancing1" baseset="MND2">
+			<neck>Enhancing Torque</neck>
+			<lear>Augment. Earring</lear>
+			<feet>Genie Huaraches</feet>
+		</set>
+		<set name="TPP">
+			<head>Walahra Turban</head>
+			<body>Reverend Mail</body>
+			<hands>Blessed Mitts +1</hands>
+			<legs>Bls. Trousers +1</legs>
+			<feet>Blessed Pumps +1</feet>
+			<neck>Almah Torque</neck>
+			<waist>Headlong Belt</waist>
+			<ear1>Brutal Earring</ear1>
+			<ear2>Suppanomimi</ear2>
+			<ring1>Rajas Ring</ring1>
+			<ring2>Harmonius Ring</ring2>
+			<back>Umbra Cape</back>
+		</set>
+		<set name="MaxMP">
+			<main>Dorje</main>
+			<sub>Staff Strap</sub>
+			<head>Zenith Crown +1</head>
+			<neck>Uggalepih Pendant</neck>
+			<lear>Astral Earring</lear>
+			<rear>Celestial Earring</rear>
+			<body>Dalmatica +1</body>
+			<hands>Zenith Mitts +1</hands>
+			<lring>Serket Ring</lring>
+			<rring>Ether Ring</rring>
+			<back>Invigorating Cape</back>
+			<waist>Hierarch Belt</waist>
+			<legs>Zenith Slacks +1</legs>
+			<feet>Zenith Pumps +1</feet>
+		</set>
+		<set name="MND2">
+			<main>Chatoyant Staff</main>
+			<sub>Vivid Strap +1</sub>
+			<ammo>Hedgehog Bomb</ammo>
+			<head>Zenith Crown +1</head>
+			<body>Mahatma Hpl.</body>
+			<hands>Blessed Mitts +1</hands>
+			<legs>Mahatma Slops</legs>
+			<feet>Goliard Clogs</feet>
+			<neck>Beak Necklace +1</neck>
+			<waist>Witch Sash</waist>
+			<ear1>Rapture Earring</ear1>
+			<ear2>Astral Earring</ear2>
+			<ring1>Celestial Ring</ring1>
+			<ring2>Celestial Ring</ring2>
+			<back>Ixion Cape</back>
+		</set>
+		<set name="eleresist">
+			<main>Chatoyant Staff</main>
+			<sub>Vivid Strap +1</sub>
+			<ammo>Hedgehog Bomb</ammo>
+			<head>Oracle's Cap</head>
+			<body>Blessed Briault +1</body>
+			<hands>Blessed Mitts +1</hands>
+			<legs>Cleric's Pantaln.</legs>
+			<feet>Cleric's Duckbills</feet>
+			<neck>Enhancing Torque</neck>
+			<waist>Witch Sash</waist>
+			<ear1>Augment. Earring</ear1>
+			<ear2>Elemental Earring</ear2>
+			<ring1>Serket Ring</ring1>
+			<ring2>Celestial Ring</ring2>
+			<back>Umbra Cape</back>
+		</set>
+		<set name="Enfeebling">
+			<main>Chatoyant Staff</main>
+			<sub>Vivid Strap +1</sub>
+			<ammo>Hedgehog Bomb</ammo>
+			<head>Zenith Crown +1</head>
+			<body>Goliard Saio</body>
+			<hands>Cleric's Mitts</hands>
+			<legs>Mahatma Slops</legs>
+			<feet>Goliard Clogs</feet>
+			<neck>Enfeebling Torque</neck>
+			<waist>Witch Sash</waist>
+			<ear1>Augment. Earring</ear1>
+			<ear2>Enfeebling Earring</ear2>
+			<ring1>Celestial Ring</ring1>
+			<ring2>Celestial Ring</ring2>
+			<back>Ixion Cape</back>
+		</set>
+		<set name="Maxmp2">
+			<body>Blessed Briault +1</body>
+			<back>Mahatma Cape</back>
+		</set>
+		<include>
+		</include>
+	</sets>
+	<variables>
+		<var name="MaxMPThreshold2">1290</var><!-- Second threshold -->
+		<var name="MaxMPThreshold">973</var> <!-- Threshold to activate Max MP gear -->
+		<var name="MaxMPMode">On</var>
+	</variables>
+	<inputcommands>
+		<cmd input ="/maxmp"> <!-- Enables or disables Max MP gear mode (default: on) -->
+			<if advanced="$MaxMPMode=Off">
+				<setvar name="MaxMPMode" value="On" />
+				<addtochat color="57">Maximum MP gear enabled!</addtochat>
+			</if>
+			<else>
+				<setvar name="MaxMPMode" value="Off" />
+				<addtochat color="57">Maximum MP gear disabled.</addtochat>
+			</else>
+		</cmd>
+		<cmd input="/debug" />
+	</inputcommands>
+	<idlegear>
+		<if advanced="(%p_mp>=$MaxMPThreshold)&($MaxMPMode=On)">
+				<equip set="MaxMP" />
+					<if advanced="(%p_mp>=$MaxMPThreshold2)&($MaxMPMode=On)">
+						<equip set="maxmp2" />
+							<gearlock length="7" />
+					</if>
+			</if>
+		<else>
+			<if p_status="resting">
+				<equip set="Resting" />
+			</if>
+			<elseif p_status="engaged">
+				<equip set="TPP" />
+			</elseif>
+			<elseif>
+				<equip set="Idle" />
+			</elseif>
+		</else>
+	</idlegear>
+	<preranged>
+	</preranged>
+	<midranged>
+	</midranged>
+	<premagic>
+	</premagic>
+	<midmagic>
+	<if advanced="(%p_mp>=$MaxMPThreshold)&($MaxMPMode=On)"> <!-- Max MP gear if past the max MP threshold and only if Max MP Mode is enabled -->
+			<equip set="MaxMP" />
+				<if advanced="(%p_mp>=$MaxMPThreshold2)&($MaxMPMode=On)">
+					<equip set="maxmp2" />
+						<gearlock length="7" />
+				</if>
+		</if>
+	<else>
+		<if ad_type="whitemagic">
+			<equip set="MND2" />
+			<if ad_skill="enfeeblingmagic">
+				<equip set="Enfeebling" />
+			</if>
+			<elseif ad_skill="enhancingmagic">
+				<equip set="Enhancing" />
+				<if ad_name="Regen*">
+					<equip><body>Cleric's Briault</body></equip>
+				</if>
+				<elseif ad_name="Bar*|Phalanx">
+					<equip set="eleresist" />
+				</elseif>
+				<elseif ad_name="Sneak">
+					<!-- Make sure to replace the name in "t_name" with your own
+					     before using this script. -->
+					<if at_name="Brownies"> 
+						<command>/cancel 71</command>
+					</if>
+				</elseif>
+			</elseif>
+			<elseif ad_skill="healingmagic">
+				<if ad_name="Cur*">
+					<equip set="Healing" />
+				</if>
+				<elseif ad_name="*Raise|Reraise">
+					<equip set="Haste" />
+				</elseif>
+			</elseif>
+		</if>
+	</else>
+	</midmagic>
+	<jobability>
+	</jobability>
+	<weaponskill>
+	</weaponskill>
+</ashitacast>

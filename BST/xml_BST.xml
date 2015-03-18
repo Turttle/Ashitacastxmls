@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+===============================================================================
+Supernova BST script for Ashitacast
+
+Contributors:
+Brownies
+v1.3 , 3/06/2015
+
+Changes:
+* Updated Family section
+* Added Gorget to the WS
+To do:
+* Need more testing.
+Commands:
+
+  
+===============================================================================
+-->
+<ashitacast>
+	<settings>
+		<buffupdate>false</buffupdate>
+		<statusupdate>false</statusupdate>
+		<hpupdate>false</hpupdate>
+		<autoupdate>true</autoupdate>
+	</settings>
+	<sets>
+		<set name="charm">
+			<main>Chatoyant Staff</main>
+			<sub>Bugard Strap +1</sub>
+			<head>Mst. Helm +1</head>
+			<body>Monster Jackcoat</body>
+			<hands>Monster Gloves</hands>
+			<legs>Monster Trousers</legs>
+			<feet>Monster Gaiters</feet>
+			<neck>Star Pendant</neck>
+			<waist>Corsette +1</waist>
+			<ear1>Melody Earring +1</ear1>
+			<ear2>Melody Earring +1</ear2>
+			<ring1>Heavens Ring +1</ring1>
+			<ring2>Heavens Ring +1</ring2>
+			<back>Amemet Mantle +1</back>
+		</set>
+		<set name="reward">
+			<main>Zoraal Ja's Axe</main>
+			<sub>Pallas's Shield</sub>
+			<head>Stout Bonnet</head>
+			<body>Monster Jackcoat</body>
+			<hands>Ogre Gloves +1</hands>
+			<legs>Monster Trousers</legs>
+			<feet>Monster Gaiters</feet>
+			<neck>Star Pendant</neck>
+			<waist>Corsette +1</waist>
+			<ear1>Melody Earring +1</ear1>
+			<ear2>Melody Earring +1</ear2>
+			<ring1>Heavens Ring +1</ring1>
+			<ring2>Heavens Ring +1</ring2>
+			<back>Amemet Mantle +1</back>
+		</set>
+		<set name="TP">
+			<!--<main>Juggernaut</main>
+			<sub>Tatami Shield</sub>-->
+			<head>Walahra Turban</head>
+			<body>Askar Korazin</body>
+			<hands>Dusk Gloves +1</hands>
+			<legs>Byakko's Haidate</legs>
+			<feet>Aurum Sabatons</feet>
+			<neck>Almah Torque</neck>
+			<waist>Sonic Belt +1</waist>
+			<ear1>Brutal Earring</ear1>
+			<ear2>Merman's Earring</ear2>
+			<ring1>Blitz Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="dex">
+			<head>Hecatomb Cap +1</head>
+			<body>Armada Hauberk</body>
+			<hands>Hct. Mittens +1</hands>
+			<legs>Byakko's Haidate</legs>
+			<feet>Hct. Leggings +1</feet>
+			<neck>Fortitude Torque</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Adroit Earring +1</ear1>
+			<ear2>Harmonius Earring</ear2>
+			<ring1>Thunder Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="str">
+			<head>Hecatomb Cap +1</head>
+			<body>Armada Hauberk</body>
+			<hands>Alkyoneus's Brc.</hands>
+			<legs>Aurum Cuisses</legs>
+			<feet>Hct. Leggings +1</feet>
+			<neck>Fortitude Torque</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Harmonius Earring</ear1>
+			<ear2>Harmonius Earring</ear2>
+			<ring1>Harmonius Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="idle">
+			<head>Mst. Helm +1</head>
+			<body>Mst. Jackcoat +1</body>
+			<hands>Monster Gloves</hands>
+			<legs>Mst. Trousers +1</legs>
+			<feet>Mst. Gaiters +1</feet>
+		</set>
+		<set name="Resting">
+			<main>Chatoyant Staff</main>
+			<sub>Bugard Strap +1</sub>
+			<head>Mst. Helm +1</head>
+			<body>Monster Jackcoat</body>
+			<hands>Monster Gloves</hands>
+			<legs>Monster Trousers</legs>
+			<feet>Monster Gaiters</feet>
+			<neck>Beak Necklace +1</neck>
+			<waist>Sonic Belt +1</waist>
+			<ear1>Rapture Earring</ear1>
+			<ear2>Antivenom Earring</ear2>
+			<ring1>Celestial Ring</ring1>
+			<ring2>Celestial Ring</ring2>
+		</set>
+		<include>
+		</include>
+	</sets>
+	<variables>
+	</variables>
+	<inputcommands>
+	</inputcommands>
+	<idlegear>
+	<if p_status="idle">
+			<equip set="idle" />
+		</if>
+		<if p_status="engaged">
+			<equip set="TP" />
+				<if p_subjob="NIN">
+					<equip><main>Juggernaut</main></equip>
+					<equip><sub>Ridill</sub></equip>
+				</if>
+		</if>
+		<if p_status="resting">
+				<equip set="Resting" />
+		</if>
+	</idlegear>
+	<preranged>
+	</preranged>
+	<midranged>
+	</midranged>
+	<premagic>
+		<if ad_skill="healingmagic">
+			<equip><main>Chatoyant Staff</main></equip>
+		</if>
+	</premagic>
+	<midmagic>
+	</midmagic>
+	<jobability>
+		<if ad_name="Reward">
+			<equip set="reward" />
+				<gearlock length="5" />
+		</if>
+		<if ad_name="Charm">
+			<equip set="charm" />
+				<!--Vermin Family-->
+				<if at_name="*antlion|*bee|*wasp|*stinger|Wespe|*Pephredo|*Hornet|*Beetle|Starmite|*borer|*Chapuli|*Chigoe|*Flea|*Crawler|*Goggie|*Eruca|Habetrot|*Diremite*|*Fly|Gallinipper|Hawker|Darter|Darner|Dancing Jewel|*bug|*Mantis|*Scorpion|Mushussu|Girtab|Antares|Scolopendrid|Diplopod|*Spider|*Attercop|*Tarantula|Spinner|*Wamoura*|*Wamouracampa" >
+					<equip><feet>Stout Gamashes</feet></equip>
+				</if>
+				<!-- Beasts Family -->
+				<elseif at_name="*Coeurl|*Lynx|Torama|Caracal*Dhalmel|Catoblepas|Camelopard|*Opo-opo|Bullbeggar|*Rabbit|*Hare|*Rarab|*Rat|*Bunny|Moss Eater|*Sheep|Broo|Wild Karakul|*Tiger|*Smilodon">
+					<equip><head>Stout Bonnet</head></equip>
+				</elseif>
+				<!-- Lizards Family -->
+				<elseif at_name="*Eft|*Lizard|Geezard|Tormentor|*Raptor|Skink|Deinonychus|Eotyrannus|*Runner|*Lindwurm|*Wivre">
+					<equip><hands>Stout Wristbands</hands></equip>
+				</elseif>
+				<!-- Plantoids Family -->
+				<elseif at_name="*trap|*Funguar|*cap|*Mushroom|Exoray|Mycohopper|Mycoskulker|*Mandragora|Mourioche|Korrigan|Puck|Malboro|Ochu|Morbol*|Lunantishee|*Ameretat|*Rose|*Rafflesia|*Sabotender*|Cactuar|*Sapling|*Spruce|*Hazel|*Snapweed|*Tree|*Treant|Leshy">
+					<equip><body>Stout Jacket</body></equip>
+				</elseif>
+				<!-- Aquans Family -->
+				<elseif at_name="*Crab|*shell|*ipper|*claw|Lacerator|Trimmer|*Pugil|*Jaw|*Makara|*Mas|*Jagil|Kraken|Sea*|Manta|*shedra|Lahama|*Toad|*Uragnite">
+					<equip></equip>
+					<equip><ring2>Atlaua's Ring</ring2></equip>
+				</elseif>
+				<!-- Amorphs Family -->
+				<elseif at_name="*Acuex|*Pudding|*eyes|*Gazer|Dodomeki|*Leech|*Parasite|*Ball|*Slug|*Ashakku|Nergal|Oil*|*Ooze|Slime*|*Clot|Brei|*Aspic|Mousse|*Syrup|*Slug|Lou Carcolh|*Worm|*Digger|*Eater|Rockmill">
+					<equip></equip>
+					<equip><ring2>Atlaua's Ring</ring2></equip>
+				</elseif>
+				<!-- Birds Family -->
+				<elseif at_name="*Apkallu|*Bats|*Bat|Bilesucker|Balayang|Desmodus|Camazotz|*Gayla|*Colibri|*Crow|*Jubjub|*Murre|Tragopan|Flamingo|*Vulture|*Skua|Condor">
+					<equip><legs>Stout Kecks</legs></equip>
+				</elseif>
+				<!-- Dragons Family -->
+				<elseif at_name="*Puk|Puk*|">
+					<equip></equip>
+				</elseif>
+				<gearlock length="5" />
+		</if>
+	</jobability>
+	<weaponskill>
+	<if ad_name="Savage Blade|Swift Blade|Seraph Blade|Shining Blade|Knights of Round|Death Blossom|Sanguine Blade">
+			<equip set="str" />
+				<if ad_name="Death Blossom|Red Lotus Blade|Savage Blade">
+					<equip><neck>Breeze Gorget</neck></equip>
+				</if>
+				<elseif ad_name="Expiacion|Seraph Blade|Shining Blade|Swift Blade|Requiescat">
+					<equip><neck>Shadow Gorget</neck></equip>
+				</elseif>
+				<gearlock length="5" />
+		</if>
+		<if ad_name="Vorpal Blade|Circle Blade|Flat Blade|Atonement">
+			<equip set="str" />
+				<if ad_name="Fast Blade|Vorpal Blade">
+					<equip><neck>Soil Gorget</neck></equip>
+				</if>
+				<gearlock length="5" />
+		</if>
+		<if ad_name="Chant du Cygne|Bora Axe|Onslaught">
+			<equip set="dex" />
+				<if ad_name="Bora Axe">
+					<equip><neck>Breeze Gorget</neck></equip>
+				</if>
+				<elseif ad_name="Onslaught">
+					<equip><neck>Shadow Gorget</neck></equip>
+				</elseif>
+				<gearlock length="5" />
+		</if>
+		<if ad_name="Raging Axe|Smash Axe|Gale Axe|Avalanche Axe|Spinning Axe|Rampage|Mistral Axe|Decimation|Ruinator">
+			<equip set="str" />
+				<if ad_name="Gale Axe|Raging Axe|Ruinator">
+					<equip><neck>Breeze Gorget</neck></equip>
+				</if>
+				<elseif ad_name="Primal Rend">
+					<equip><neck>Shadow Gorget</neck></equip>
+				</elseif>
+				<gearlock length="5" />
+		</if>
+		<if ad_name="Calamity">
+			<equip set="str-vit" />
+				<equip><neck>Soil Gorget</neck></equip>
+				<gearlock length="5" />
+		</if>
+	</weaponskill>
+</ashitacast>

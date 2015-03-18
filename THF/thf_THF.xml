@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+===============================================================================
+Supernova THF script for Ashitacast
+
+Contributors:
+Brownies
+
+v1.5 , 3/07/2015
+
+Changes:
+* Fixed Auto tag TH4
+* Added Gorget to WS
+
+To do:
+* Need more testing.
+
+Commands:
+/th4 on ; turns on TH4 set.
+/th4 off; turns off TH4 set.
+  
+===============================================================================
+-->
+<ashitacast>
+	<settings>
+		<buffupdate>true</buffupdate>
+		<statusupdate>true</statusupdate>
+		<hpupdate>true</hpupdate>
+		<autoupdate>true</autoupdate>
+	</settings>
+	<variables>
+	<var name="th4">false</var>
+	</variables>
+	<sets>
+		<!-- Dex and agi set here -->
+		<set name="dex-agi">
+			<head>Dragon Cap +1</head>
+			<body>Denali Jacket</body>
+			<hands>Dragon Mittens +1</hands>
+			<legs>Drn. Subligar +1</legs>
+			<feet>Drn. Leggings +1</feet>
+			<neck>Breeze Gorget</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Pixie Earring</ear1>
+			<ear2>Suppanomimi</ear2>
+			<ring1>Thunder Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Assassin's Cape</back>
+		</set>
+		<!-- Str set here -->
+		<set name="str">
+			<head>Hecatomb Cap +1</head>
+			<body>Hct. Harness +1</body>
+			<hands>Hct. Mittens +1</hands>
+			<legs>Hct. Subligar +1</legs>
+			<feet>Hct. leggings +1</feet>
+			<neck>Breeze Gorget</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Harmonius Earring</ear1>
+			<ear2>Harmonius Earring</ear2>
+			<ring1>Harmonius Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<!-- Tp set here -->
+		<set name="tp">
+			<head>Walahra Turban</head>
+			<body>Rapparee Harness</body>
+			<hands>Dusk Gloves +1</hands>
+			<legs>Bravo's Subligar</legs>
+			<feet>Enkidu's Leggings</feet>
+			<neck>Almah Torque</neck>
+			<waist>Sonic Belt +1</waist>
+			<ear1>Suppanomimi</ear1>
+			<ear2>Brutal Earring</ear2>
+			<ring1>Thunder Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="Haste">
+			<head>Walahra Turban</head>
+			<body>Rapparee Harness</body>
+			<hands>Dusk Gloves +1</hands>
+			<legs>Bravo's Subligar</legs>
+			<feet>Enkidu's Leggings</feet>
+			<neck>Tiercel necklace</neck>
+			<waist>Sonic Belt +1</waist>
+		</set>
+		<!-- Dex set here -->
+		<set name="dex">
+			<head>Hecatomb Cap +1</head>
+			<body>Dragon Harness +1</body>
+			<hands>Hct. Mittens +1</hands>
+			<legs>Hct. Subligar +1</legs>
+			<feet>Drn. Leggings +1</feet>
+			<neck>Ancient Torque</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Pixie Earring</ear1>
+			<ear2>Adroit Earring +1</ear2>
+			<ring1>Thunder Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Assassin's Cape</back>
+		</set>
+		<!-- Treasure hunter set here -->
+		<set name="TH4">
+			<main>Thief's Knife</main>
+			<sub>Ridill</sub>
+			<range>Ungur Boomerang</range>
+			<hands>Asn. Armlets +1</hands>
+		</set>
+		<!-- Idle set here -->
+		<set name="idle" baseset="dex">
+			<!--<main>Azoth</main>-->
+			<!--<main>Batardeau</main>
+			<sub>Ridill</sub>-->
+			<range>Ungur Boomerang</range>
+			<head>Asn. Bonnet +1</head>
+			<body>Assassin's Vest</body>
+			<hands>Asn. Armlets +1</hands>
+			<legs>Asn. Culottes +1</legs>
+			<feet>Asn. Poulaines +1</feet>
+		</set>
+		<set name="weapons">
+			<main>Mandau</main>
+			<sub>Ridill</sub>
+		</set>
+		<set name="eva">
+			<range>Ungur Boomerang</range>
+			<head>Optical Hat</head>
+			<body>Scp. Harness +1</body>
+			<hands>Raven Bracers</hands>
+			<legs>Raven Hose</legs>
+			<feet>Raven Gaiters</feet>
+			<waist>Scouter's Rope</waist>
+			<back>Corse Cape</back>
+		</set>
+		<set name="idle1">
+			<head>Homam Zucchetto</head>
+			<body>Homam Corazza</body>
+			<hands>Homam Manopolas</hands>
+			<legs>Homam Cosciales</legs>
+			<feet>Homam Gambieras</feet>
+		</set>
+		<set name="tp2">
+			<range>Ungur Boomerang</range>
+			<head>Denali Bonnet</head>
+			<body>Rapparee Harness</body>
+			<hands>Homam Manopolas</hands>
+			<legs>Homam Cosciales</legs>
+			<feet>Homam Gambieras</feet>
+			<neck>Almah Torque</neck>
+			<waist>Sonic Belt +1</waist>
+			<ear1>Suppanomimi</ear1>
+			<ear2>Brutal Earring</ear2>
+			<ring1>Thunder Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<include>
+		</include>
+	</sets>
+	<inputcommands>
+		<cmd input="/th4 on">
+			<if advanced="$th4=false">
+				<setvar name="th4" value="true" />
+				<command>/ac disable main</command>
+				<command>/ac disable sub</command>
+				<command>/ac disable hands</command>
+				<addtochat color="57">TH4 mode enabled!</addtochat>
+			</if>
+		</cmd>
+		<cmd input="/th4 off">
+			<if advanced="$th4=true">
+				<setvar name="th4" value="false" />
+				<command>/ac enable main</command>
+				<command>/ac enable sub</command>
+				<command>/ac enable hands</command>
+				<addtochat color="57">THmode mode disabled.</addtochat>
+			</if>
+		</cmd>
+	</inputcommands>
+	<idlegear>
+		<!-- this will equip idle of vanity set in chocobo circuit -->
+		<if p_status="idle">
+			<equip set="idle1" />
+				<if eq_ring2="Empress Band">
+					<equip lock="true" />
+		</if>
+		</if>
+		<!-- this will check the zone you are in and load the appropriated Aketon --> 
+		<if e_area="Port San d'Oria|*San d'Oria|-Dynamis*">
+			<equip><body>Kingdom Aketon</body></equip>
+		</if>
+		<if e_area="Port Windurst|Windurst*|-Dynamis*">
+			<equip><body>Federation Aketon</body></equip>
+		</if>
+		<if e_area="Port Bastok|*Bastok|Metalworks|-Dynamis*">
+			<equip><body>Republic Aketon</body></equip>
+		</if>			
+		<!-- Dynamis zone check 
+		<if e_area="Dynamis*">
+			<equip set="TH4" />
+		</if>
+		-->
+		<if p_status="engaged">
+			<if advance="$THmode=True">
+			<!-- TP check to tag TH4-->	
+				<if p_tp=">201">
+						<equip set="weapons" />
+				</if>
+				<if p_tp = "<200">
+					<if t_hpp="100">
+						<equip set="TH4" />
+					</if>
+				</if>
+			<!-- ends tp check -->
+			</if>
+			<else>
+				<equip set="TP2" />
+			</else>
+		</if>
+	</idlegear>
+	<preranged>	
+	</preranged>
+	<midranged>
+	</midranged>
+	<premagic>
+		<!--if ad_skill="Dragon Breath">
+			<addtochat color="57"> Dragon is using Dragon Breath LOL this works </addtochat>
+		</if>
+		<if ad_skill="Hurricane Wing">
+			<addtochat color="57"> Dragon is using Hurricane Wing  LOL this works </addtochat>
+		</if-->
+		<if ad_skill="Ninjutsu">
+			<equip set="Haste" />
+				<gearlock length="2" />
+		</if>
+	</premagic>
+	<midmagic>
+		<if ad_skill="Ninjutsu">
+			<equip set="eva" />
+				<gearlock length="5" />
+		</if>
+	</midmagic>
+	<jobability>
+		<!-- This will equip thf set -->
+		<if ad_skill="Steal|Mug">
+			<equip set="THF" />
+				<gearlock length="5" />
+		</if>
+	</jobability>
+	<weaponskill>
+		<!-- equip dex set when any of these ws are used -->
+		<if ad_name="Cyclone|Viper Bite|Evisceration|Rudra's Storm|Mandalic Stab|Aeolian Edge|Wasp Sting|Gust Slash">
+			<equip set="dex" />
+				<if ad_name="Cyclone|Gust Slash|Aeolian Edge">
+					<equip><neck>Breeze Gorget</neck></equip>
+				</if>
+				<elseif ad_name="Evisceration|Mandalic Stab|Rudra's Storm">
+					<equip><neck>Shadow Gorget</neck></equip>
+				</elseif>
+				<gearlock length="7" />
+		</if>
+		<!-- equip str set when any of these ws are used -->
+		<if ad_name="Mercy Stroke">
+			<equip set="str" />
+				<equip><neck>Shadow Gorget</neck></equip>
+				<gearlock length="7" />
+		</if>
+		<!-- equip dext-agi set when any of these ws are used -->
+		<if ad_name="Shark Bite|Dancing Edge|Exenterator">
+			<equip set="dex-agi" />
+				<if ad_name="Dancing Edge|Shark Bite|Exenterator">
+					<equip><neck>Breeze Gorget</neck></equip>
+				</if>
+				<gearlock length="7" />
+		</if>
+	</weaponskill>
+</ashitacast>

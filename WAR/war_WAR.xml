@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+===============================================================================
+Supernova WAR script for Ashitacast
+
+Contributors:
+Brownies
+
+v1.5 , 1/30/2015
+
+Changes:
+* Created the xml
+* str-mind 40 40 Cloudsplitter
+* dex chr 30 60 Primal Rend
+* added axe ws
+* added polearm ws
+To do:
+* Need more testing.
+Commands:
+
+  
+===============================================================================
+-->
+<ashitacast>
+	<settings>
+		<buffupdate>false</buffupdate>
+		<statusupdate>false</statusupdate>
+		<hpupdate>false</hpupdate>
+		<autoupdate>true</autoupdate>
+	</settings>
+	<sets>
+		<set name="tpset">
+			<head>Walahra Turban</head>
+			<body>Askar Korazin</body>
+			<hands>Aurum Gauntlets</hands>
+			<legs>Byakko's Haidate</legs>
+			<feet>Aurum Sabatons</feet>
+			<neck>Almah Torque</neck>
+			<waist>Sonic Belt +1</waist>
+			<ear1>Merman's Earring</ear1>
+			<ear2>Brutal Earring</ear2>
+			<ring1>Rajas Ring</ring1>
+			<ring2>Blitz Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="STR">
+			<head>Hecatomb Cap +1</head>
+			<body>Hct. Harness +1</body>
+			<hands>Hct. Mittens +1</hands>
+			<legs>Abtal Zerehs</legs>
+			<feet>Askar Gambieras</feet>
+			<neck>Fortitude Torque</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Harmonius Earring</ear1>
+			<ear2>Harmonius Earring</ear2>
+			<ring1>Harmonius Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="STR2">
+			<head>Hecatomb Cap +1</head>
+			<body>Armada Hauberk</body>
+			<hands>Hct. Mittens +1</hands>
+			<legs>Abtal Zerehs</legs>
+			<feet>Askar Gambieras</feet>
+			<neck>Fortitude Torque</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Harmonius Earring</ear1>
+			<ear2>Harmonius Earring</ear2>
+			<ring1>Harmonius Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="TP">
+			<head>Walahra Turban</head>
+			<body>Askar Korazin</body>
+			<hands>Dusk Gloves +1</hands>
+			<legs>Byakko's Haidate</legs>
+			<feet>Aurum Sabatons</feet>
+			<neck>Almah Torque</neck>
+			<waist>Sonic Belt +1</waist>
+			<ear1>Brutal Earring</ear1>
+			<ear2>Suppanomimi</ear2>
+			<ring1>Blitz Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="idle" baseset="TP">
+			<head>Glory Crown</head>
+			<body>Askar Korazin</body>
+			<legs>Askar Dirs</legs>
+			<feet>Askar Gambieras</feet>
+		</set>
+		<set name="dex">
+			<head>Hecatomb Cap +1</head>
+			<body>Hct. Harness +1</body>
+			<hands>Hct. Mittens +1</hands>
+			<legs>Hct. Subligar +1</legs>
+			<feet>Hct. Leggings +1</feet>
+			<neck>Fortitude Torque</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Adroit Earring +1</ear1>
+			<ear2>Harmonius Earring</ear2>
+			<ring1>Thunder Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="str4">
+			<head>Hecatomb Cap +1</head>
+			<body>Armada Hauberk</body>
+			<hands>Alkyoneus's Brc.</hands>
+			<legs>Abtal Zerehs</legs>
+			<feet>Hct. Leggings +1</feet>
+			<neck>Fortitude Torque</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Harmonius Earring</ear1>
+			<ear2>Harmonius Earring</ear2>
+			<ring1>Harmonius Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<set name="str-dex">
+			<head>Hecatomb Cap +1</head>
+			<body>Armada Hauberk</body>
+			<hands>Hct. Mittens +1</hands>
+			<legs>Byakko's Haidate</legs>
+			<feet>Hct. Leggings +1</feet>
+			<neck>Fortitude Torque</neck>
+			<waist>Warwolf Belt</waist>
+			<ear1>Adroit Earring +1</ear1>
+			<ear2>Harmonius Earring</ear2>
+			<ring1>Thunder Ring</ring1>
+			<ring2>Rajas Ring</ring2>
+			<back>Cerb. Mantle +1</back>
+		</set>
+		<include>
+		</include>
+	</sets>
+	<variables>
+	</variables>
+	<inputcommands>
+	</inputcommands>
+	<idlegear>
+		<if p_status="idle">
+			<equip set="idle" />
+				<equip><hands>Aurum Gauntlets</hands></equip>
+		</if>
+		<if p_status="engaged">
+			<equip set="TP" />
+		</if>
+	</idlegear>
+	<preranged>
+	</preranged>
+	<midranged>
+	</midranged>
+	<premagic>
+	</premagic>
+	<midmagic>
+	</midmagic>
+	<jobability>
+	</jobability>
+	<weaponskill>
+		<if ad_name="Iron Tempest|Sturmwind|Keen Edge|Raging Rush|Fell Cleave|Metatron Torment|Ukko's Fury|King's Justice">
+			<equip set="STR4" />
+				<if ad_name="King's Justice|Steel Cyclone|Fell Cleave|Ukko's Fury">
+					<equip><neck>Breeze Gorget</neck></equip>
+				</if>
+		</if>
+		<if ad_name="Savage Blade|Swift Blade|Seraph Blade|Shining Blade|Knights of Round|Death Blossom|Sanguine Blade">
+			<equip set="str4" />
+				<gearlock length="5" />
+				<if ad_name="Death Blossom|Red Lotus Blade|Savage Blade">
+					<equip><neck>Breeze Gorget</neck></equip>
+				</if>
+		</if>
+		<if ad_name="Vorpal Blade|Circle Blade|Flat Blade|Atonement">
+			<equip set="str4" />
+				<gearlock length="5" />
+		</if>
+		<if ad_name="Chant du Cygne|Bora Axe|Onslaught">
+			<equip set="dex" />
+				<gearlock length="5" />
+		</if>
+		<if ad_name="Raging Axe|Smash Axe|Gale Axe|Avalanche Axe|Spinning Axe|Rampage|Mistral Axe|Decimation|Ruinator">
+			<equip set="str4" />
+				<gearlock length="5" />
+				<if ad_name="Gale Axe|Raging Axe|Ruinator">
+					<equip><neck>Breeze Gorget</neck></equip>
+				</if>
+		</if>
+		<if ad_name="Calamity">
+			<equip set="str-vit" />
+				<gearlock length="5" />
+		</if>
+		<if ad_name="Penta Thrust">
+			<equip set="str-dex" />
+				<gearlock length="5" />
+		</if>
+	</weaponskill>
+</ashitacast>
