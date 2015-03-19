@@ -1,0 +1,217 @@
+<!--
+===============================================================================
+Laerion's MNK script for Ashitacast
+v1.0b, 30/01/2015
+
+Changes:
+
+To do:
+
+===============================================================================
+-->
+<ashitacast>
+	<settings> <!--Contains settings specific to this xml, must be set to true/false to override default-->
+		<buffupdate>false</buffupdate> <!--Determines if your idlegear will be parsed when you gain/lose a buff. Default: TRUE -->
+		<statusupdate>true</statusupdate> <!--Determines if your idlegear will be parsed when you change status(stand/rest/engage/etc).  Default: TRUE -->
+		<hpupdate>true</hpupdate> <!--Determines if your idlegear will be parsed when your HP % changes.  Default: FALSE -->
+		<autoupdate>true</autoupdate> <!--Determines if your idlegear will be parsed on outgoing status updates(roughly every 350ms).  Default: FALSE -->
+	</settings>
+<sets>
+	<set name="Idle">
+	    <main>Spharai</main>  
+		<ammo>White Tathlum</ammo>
+		<head>Maat's Cap</head>
+		<neck>Orochi Nodowa +1</neck>
+		<lear>Brutal Earring</lear>
+		<rear>Bushinomimi</rear>
+		<body>Mel. Cyclas +1</body>
+		<hands>Mel. Gloves +1</hands>
+		<lring>Rajas Ring</lring>
+		<rring>Toreador's Ring</rring>
+		<back>Boxer's Mantle</back>
+		<waist>Black Belt</waist>
+		<legs>Byakko's Haidate</legs>
+		<feet>Herald's Gaiters</feet>
+	</set>
+	
+	<set name="Evasion">
+	    <body>Antares harness</body>
+		<rear>Evasion Earring</rear>
+		<lear>Musical Earring</lear>
+		<head>Optical Hat</head>
+		<ammo>White Tathlum</ammo>
+		<neck>Evasion Torque</neck>
+		<hands>Danzo Tekko</hands>
+		<lring>Rajas Ring</lring>
+		<rring>Toreador's Ring</rring>
+		<back>Boxer's Mantle</back>
+		<waist>Black Belt</waist>
+		<legs>Tpl. Hose +1</legs>
+		<feet>Mel. Gaiters +1</feet>
+	</set>
+	
+	<set name="TP">
+		<head>Denali Bonnet</head>
+		<ammo>White Tathlum</ammo>
+		<neck>Chivalrous Chain</neck>
+		<lear>Brutal Earring</lear>
+		<rear>Merman's Earring</rear>
+		<body>Hachiryu Haramaki</body>
+		<hands>Mel. Gloves +1</hands>
+		<lring>Rajas Ring</lring>
+		<rring>Ecphoria Ring</rring>
+		<back>Charger Mantle</back>
+		<waist>Black Belt</waist>
+		<legs>Byakko's Haidate</legs>
+		<feet>Fuma Sune-ate</feet>
+	</set>
+	
+	<set name="WS-STR">
+		<head>Maat's Cap</head>
+		<ammo>Black Tathlum</ammo>
+		<neck>Light Gorget</neck>
+		<lear>Harmonius earring</lear>
+		<rear>Bushinomimi</rear>
+		<body>Kirin's Osode</body>
+		<hands>Alkyoneus's Brc.</hands>
+		<lring>Rajas Ring</lring>
+		<rring>Harmonius Ring</rring>
+		<back>Cuchulain's Mantle</back>
+		<waist>Warwolf Belt</waist>
+		<legs>Hachiryu Haidate</legs>
+		<feet>Denali Gamashes</feet>
+	</set>
+	
+	<set name="WS-ACC">
+		<head>Shr. Znr. Kabuto +1</head>
+		<ammo>Black Tathlum</ammo>
+		<neck>Flame Gorget</neck>
+		<lear>Brutal Earring</lear>
+		<rear>Merman's Earring</rear>
+		<body>Hachiryu Haramaki</body>
+		<hands>Bandomusha Kote</hands>
+		<lring>Rajas Ring</lring>
+		<rring>Harmonius Ring</rring>
+		<back>Cerberus Mantle +1</back>
+		<waist>Potent Belt</waist>
+		<legs>Hachiryu Haidate</legs>
+		<feet>Denali Gamashes</feet>
+	</set>
+	
+	<include>
+		<item>Shr. Znr. Kabuto +1</item>
+		<item>Black Tathlum</item>
+		<item>Denali Bonnet</item>
+		<item quantity="all">Shihei</item>
+		<item quantity="all">Antacid</item>
+		<item quantity="12">Sole Sushi +1</item>
+		<item quantity="10">Toolbag (Shihe)</item>
+		<item quantity="12">Remedy</item>
+		<item quantity="12">R. Curry Bun +1</item>
+		<item quantity="all">Shinobi-Tabi</item>
+		<item quantity="all">Sanjaku-Tenugui</item>
+		<item quantity="12">Silent Oil</item>
+		<item quantity="12">Prism Powder</item>
+	</include>
+</sets>
+
+<variables>
+</variables>
+
+<inputcommands>
+	<cmd input="/evasionon">
+		<setvar name="Evas" value="1"/>
+		<addtochat color="57">Evasion set enabled!</addtochat>
+	</cmd>
+	<cmd input="/evasionoff">
+		<setvar name="Evas" value="0"/>
+		<addtochat color="57">Evasion set disabled.</addtochat>
+	</cmd>
+	<cmd input="/wson">
+		<setvar name="autows" value="1"/>
+		<addtochat color="57">Auto Asuran Fists GO!.</addtochat>
+	</cmd>
+	<cmd input="/wsoff">
+		<setvar name="autows" value="0"/>
+		<addtochat color="57">Auto Asuran Fists disabled.</addtochat>
+	</cmd>
+	
+</inputcommands>
+
+<idlegear>
+	<if p_status="engaged">
+		<if advanced="$Evas=1">
+			<equip set="Evasion" />
+		</if>	
+	    <else>
+            <equip set="TP" />
+        </else>		
+		<elseif advanced="(%p_hpp<26)&(%p_tp<100)">
+			<equip><ear2>Kampfer Earring</ear2></equip>
+		</elseif>
+		<elseif e_Time=">5.59&<18.00">
+			<equip><ear2>Fenrir's Earring</ear2></equip>
+		</elseif>
+		<if advanced="$autows=1">
+			<if eq_main="Spharai">
+				<setvar name="weaponskill" value="Asuran Fists"/>
+			</if>
+			<if p_tp=">99">
+				<if t_hpp=">20">
+				<command>/ws "$weaponskill" &lt;t&gt;</command>
+				</if>
+			</if>
+		</if>
+	</if>
+	<else>
+		<equip set="Idle" />
+	</else>
+</idlegear>
+
+<preranged>
+	<!--Same subnodes as command triggers, is processed when a shot starts.  Equip tags will be on when the shot starts.-->
+</preranged>
+	
+<midranged>
+	<!--Same subnodes as command triggers, is processed before shot ends.  Equip tags will be on when the shot finishes.-->
+</midranged>
+
+<premagic>
+	<!--Same subnodes as command triggers, is processed when a spell starts.  Equip tags will be on when the spell starts.-->
+	<if ad_skill="ninjutsu">
+		<equip set="TP" />
+	</if>
+</premagic>
+	
+<midmagic>
+	<!--Same subnodes as command triggers, is processed before a spell ends.  Equip tags will be on when the spell finishes.-->
+</midmagic>
+
+<jobability>
+	<if ad_name="Counterstance">
+		<equip><feet>Mel. Gaiters +1</feet></equip>
+	</if>
+	<elseif ad_name="Boost">
+	    <equip><hands>Temple Gloves</hands></equip>
+	</elseif>
+	<elseif ad_name="Chakra">
+	    <equip><body>Temple Cyclas</body></equip>
+		<equip><hands>Mel. Gloves +1</hands></equip>
+	</elseif>
+    <elseif ad_name="Dodge">
+        <equip><feet>Temple Gaiters</feet></equip>
+    </elseif>		
+</jobability>
+
+<weaponskill>
+	<if ad_name="Asuran Fists">
+		<equip set="WS-ACC" />
+		<if e_Time=">5.59&<18.00">
+			<equip><ear2>Fenrir's Earring</ear2></equip>
+		</if>
+	</if>
+	<else>
+		<equip set="WS-STR" />
+	</else>
+</weaponskill>
+</ashitacast>
